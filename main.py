@@ -23,8 +23,8 @@ def email_is_valid(email: str):
     else:
       return False
 
-
-email = sl.text_input('If you want to get weekly updates of #daily-music and get to know a bunch of fun stats, subscribe to the email list!', value='example@example.com')
+sl.write('If you want to get weekly updates of #daily-music and get to know a bunch of fun stats, subscribe to the email list!')
+email = sl.text_input('', value='example@example.com')
 if sl.button('Subscribe'):
     con = snowflake.connector.connect(**sl.secrets["snowflake"])
     add_email_to_mailing_list(email)
