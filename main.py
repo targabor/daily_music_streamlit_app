@@ -10,8 +10,8 @@ sl.header('Schema Music')
 def add_email_to_mailing_list(email: str):
     if email_is_valid(email) and email != 'example@example.com':
         with con.cursor() as cur:
-        cur.execute(f"INSERT INTO CONSOLIDATED.subscribers VALUES ('{email}')")
-        sl.write(f'subscribed with {email}')
+            cur.execute(f"INSERT INTO CONSOLIDATED.subscribers VALUES ('{email}')")
+            sl.write(f'subscribed with {email}')
     else:
         sl.write('please add a valid email address')
         
@@ -28,4 +28,5 @@ email = sl.text_input('If you want to get weekly updates of #daily-music and get
 if sl.button('Subscribe'):
     con = snowflake.connector.connect(**sl.secrets["snowflake"])
     add_email_to_mailing_list(email)
+    con.close()
 
