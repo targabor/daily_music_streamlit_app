@@ -19,9 +19,9 @@ def add_email_to_mailing_list(email: str):
 
 def email_is_valid(email: str):
     if re.fullmatch(regex, email):
-      return true
+      return True
     else:
-      return false
+      return False
 
 
 email = sl.text_input('If you want to get weekly updates of #daily-music and get to know a bunch of fun stats, subscribe to the email list!', value='example@example.com')
