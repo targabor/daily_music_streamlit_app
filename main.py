@@ -5,11 +5,19 @@ import re
 import base64
 import hashlib
 
+sl.markdown(
+    """
+    <style>
+    .reportview-container {
+        background-color: #1DB954;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-regex = re.compile(
+email_regex = re.compile(
     r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
-
-sl.header('Schema Music')
 
 
 def add_email_to_mailing_list(email: str):
@@ -26,11 +34,13 @@ def add_email_to_mailing_list(email: str):
 
 
 def email_is_valid(email: str):
-    if re.fullmatch(regex, email):
+    if re.fullmatch(email_regex, email):
         return True
     else:
         return False
 
+
+sl.header('Schema Music')
 
 sl.write('If you want to get weekly updates of #daily-music and get to know a bunch of fun stats, subscribe to the mailing list!')
 email = sl.text_input('', value='example@example.com')
