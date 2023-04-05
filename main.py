@@ -13,7 +13,7 @@ def add_email_to_mailing_list(email: str):
     if email_is_valid(email) and email != 'example@example.com':
         with con.cursor() as cur:
             cur.execute(
-                "INSERT INTO CONSOLIDATED.subscribers (ID, EMAIL) VALUES (CAST(ABS(HASH(%s)) AS VARCHAR),%s)", (email, email))
+                "INSERT INTO CONSOLIDATED.subscribers (ID, EMAIL) VALUES ((ABS(HASH(%s)),%s)", (email, email))
             sl.write(f'subscribed with {email}')
     else:
         sl.write('please add a valid email address')
