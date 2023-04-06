@@ -5,16 +5,7 @@ import re
 import base64
 import hashlib
 
-sl.markdown(
-    """
-    <style>
-    .reportview-container {
-        background-color: #1DB954;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+from streamlit import set_page_config
 
 email_regex = re.compile(
     r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
