@@ -2,8 +2,7 @@ import streamlit as sl
 import snowflake_functions
 import pandas as pd
 
-sl.set_page_config(page_title='Schema music', page_icon='🎵', primaryColor="#1DB954", backgroundColor="#191414",
-                   secondaryBackgroundColor="#191414", textColor="#FFFFFF")
+sl.set_page_config(page_title='Schema music', page_icon='🎵')
 
 snowflake_secrets = sl.secrets['snowflake']
 
