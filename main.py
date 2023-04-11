@@ -1,6 +1,7 @@
 import streamlit as sl
 import snowflake_functions
 import pandas as pd
+import webbrowser
 
 sl.set_page_config(page_title='Schema music', page_icon='🎵')
 
@@ -23,6 +24,7 @@ if selected_artist:
                                         == selected_artist]
 
 # Change this list to adjust the options
+# Change this list to adjust the options
 rows_per_page_options = [5, 10, 20, 50, 100]
 rows_per_page = sl.selectbox("Rows per page:", options=rows_per_page_options)
 
@@ -35,7 +37,11 @@ start_index = (page - 1) * rows_per_page
 end_index = min(page * rows_per_page, num_rows)
 
 sl.write(f"Displaying rows {start_index+1} to {end_index} of {num_rows}")
-sl.dataframe(all_track_data.iloc[start_index:end_index])
+df = all_track_data.iloc[start_index:end_index]
+for index, row in df.iterrows():
+    sl.write(row['Song Title'], row['Artist'], row['Popularity'])
+    if sl.button("Open URL", key=index):
+        webbrowser.open_new_tab(row['Song URL'])
 
 
 # Email Subscription part
