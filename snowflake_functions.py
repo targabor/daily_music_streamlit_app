@@ -24,7 +24,7 @@ def get_all_track_data(secrets) -> pd.DataFrame:
     select_query = '''  SELECT distinct ST.TITLE as "Song Title", 
                                         IFNULL(A.NAME, 'unknown') as Artist, 
                                         ST.POPULARITY as Popularity,
-                                        CONCAT('https://open.spotify.com/track/', ST.TRACK_ID) as "Song URL" FROM SPOTIFY_TRACK ST
+                                        CONCAT('https://open.spotify.com/track/', ST.TRACK_ID) as "Song Title" FROM SPOTIFY_TRACK ST
                         LEFT JOIN ARTIST A ON A.ID = ST.ARTIST_ID;'''
     query_result = None
     with snowflake.connector.connect(user=secrets['user'],
