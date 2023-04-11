@@ -22,7 +22,15 @@ if selected_artist:
     all_track_data = all_track_data.loc[all_track_data['ARTIST']
                                         == selected_artist]
 
-sl.dataframe(all_track_data)
+rows_per_page = 35  # Change this value to adjust number of rows per page
+num_rows = all_track_data.shape[0]
+num_pages = num_rows // rows_per_page + (num_rows % rows_per_page > 0)
+
+for page in range(num_pages):
+    sl.write(f"Page {page + 1}/{num_pages}")
+    start_index = page * rows_per_page
+    end_index = min((page + 1) * rows_per_page, num_rows)
+    sl.dataframe(all_track_data.iloc[start_index:end_index], width=800)
 
 
 # Email Subscription part
