@@ -14,13 +14,13 @@ if search_title:
     all_track_data = all_track_data.loc[all_track_data.index.str.contains(
         search_title, case=False)]
 
-dropdown_value = sl.selectbox(
-    'Search by artist name', all_track_data['ARTIST'].unique())
+all_artist_names = all_track_data['ARTIST'].unique()
+artist_options = [''] + list(all_artist_names)
+selected_artist = sl.selectbox('Search by artist name', artist_options)
 
-if dropdown_value:
+if selected_artist:
     all_track_data = all_track_data.loc[all_track_data['ARTIST']
-                                        == dropdown_value]
-
+                                        == selected_artist]
 
 sl.dataframe(all_track_data)
 
