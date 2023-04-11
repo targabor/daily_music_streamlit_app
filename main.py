@@ -39,7 +39,7 @@ end_index = min(page * rows_per_page, num_rows)
 sl.write(f"Displaying rows {start_index+1} to {end_index} of {num_rows}")
 df = all_track_data.iloc[start_index:end_index]
 for index, row in df.iterrows():
-    sl.write(row['Song Title'], row['Artist'], row['Popularity'])
+    sl.write(row['SONG TITLE'], row['ARTIST'], row['POPULARITY'])
     if sl.button("Open URL", key=index):
         webbrowser.open_new_tab(row['Song URL'])
 
