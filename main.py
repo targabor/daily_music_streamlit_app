@@ -1,7 +1,6 @@
 import streamlit as sl
 import snowflake_functions
 import pandas as pd
-import webbrowser
 
 sl.set_page_config(page_title='Schema music', page_icon='🎵')
 
@@ -9,7 +8,7 @@ snowflake_secrets = sl.secrets['snowflake']
 
 # Interactive table based on Snowflake
 all_track_data = snowflake_functions.get_all_track_data(snowflake_secrets)
-all_track_data.set_index('SONG TITLE', inplace=True)
+all_track_data.set_index('Song Title', inplace=True)
 search_title = sl.text_input('Search by track name')
 if search_title:
     all_track_data = all_track_data.loc[all_track_data.index.str.contains(
@@ -23,6 +22,7 @@ if selected_artist:
     all_track_data = all_track_data.loc[all_track_data['ARTIST']
                                         == selected_artist]
 
+# Change this list to adjust the options
 rows_per_page_options = [5, 10, 20, 50, 100]
 rows_per_page = sl.selectbox("Rows per page:", options=rows_per_page_options)
 
@@ -35,16 +35,7 @@ start_index = (page - 1) * rows_per_page
 end_index = min(page * rows_per_page, num_rows)
 
 sl.write(f"Displaying rows {start_index+1} to {end_index} of {num_rows}")
-
-df = all_track_data.iloc[start_index:end_index]
-
-# Display data as a table
-sl.dataframe(df[['ARTIST', 'POPULARITY']])
-
-# Display a button for each row
-for index, row in df.iterrows():
-    if sl.button("Open URL", key=index):
-        webbrowser.open_new_tab(row['SONG URL'])
+sl.dataframe(all_track_data.iloc[start_index:end_index])
 
 
 # Email Subscription part
