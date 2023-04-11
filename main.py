@@ -9,27 +9,27 @@ snowflake_secrets = sl.secrets['snowflake']
 # Interactive table based on Snowflake
 all_track_data = snowflake_functions.get_all_track_data(snowflake_secrets)
 all_track_data.set_index('Song Title', inplace=True)
-search_title = sl.text_input('Search by track name')
-if search_title:
-    all_track_data = all_track_data.loc[all_track_data.index.str.contains(
-        search_title, case=False)]
+# search_title = sl.text_input('Search by track name')
+# if search_title:
+#     all_track_data = all_track_data.loc[all_track_data.index.str.contains(
+#         search_title, case=False)]
 
-dropdown_value = sl.selectbox(
-    'Search by artist name', all_track_data['Artist'].unique())
+# dropdown_value = sl.selectbox(
+#     'Search by artist name', all_track_data['Artist'].unique())
 
-if dropdown_value:
-    all_track_data = all_track_data.loc[all_track_data['Artist']
-                                        == dropdown_value]
+# if dropdown_value:
+#     all_track_data = all_track_data.loc[all_track_data['Artist']
+#                                         == dropdown_value]
 
-sort_by_popularity = sl.checkbox('Sort by popularity')
+# sort_by_popularity = sl.checkbox('Sort by popularity')
 
-sort_order = sl.radio('Sort order', ['Ascending', 'Descending'])
-if sort_by_popularity:
-    if sort_order == 'Ascending':
-        all_track_data = all_track_data.sort_values(by='Popularity')
-    else:
-        all_track_data = all_track_data.sort_values(
-            by='Popularity', ascending=False)
+# sort_order = sl.radio('Sort order', ['Ascending', 'Descending'])
+# if sort_by_popularity:
+#     if sort_order == 'Ascending':
+#         all_track_data = all_track_data.sort_values(by='Popularity')
+#     else:
+#         all_track_data = all_track_data.sort_values(
+#             by='Popularity', ascending=False)
 
 
 sl.dataframe(all_track_data)
