@@ -39,8 +39,7 @@ sl.write(f"Displaying rows {start_index+1} to {end_index} of {num_rows}")
 df = all_track_data.iloc[start_index:end_index]
 
 # Display data as a table
-sl.write(all_track_data.columns)
-sl.dataframe(df[['SONG TITLE', 'ARTIST', 'POPULARITY']])
+sl.dataframe(df[['ARTIST', 'POPULARITY']])
 
 # Display a button for each row
 for index, row in df.iterrows():
