@@ -41,7 +41,7 @@ df = all_track_data.iloc[start_index:end_index]
 for index, row in df.iterrows():
     sl.write(row['SONG TITLE'], row['ARTIST'], row['POPULARITY'])
     if sl.button("Open URL", key=index):
-        webbrowser.open_new_tab(row['Song URL'])
+        webbrowser.open_new_tab(row['SONG URL'])
 
 
 # Email Subscription part
