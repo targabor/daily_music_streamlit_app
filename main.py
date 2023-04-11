@@ -22,21 +22,7 @@ if selected_artist:
     all_track_data = all_track_data.loc[all_track_data['ARTIST']
                                         == selected_artist]
 
-# Change this list to adjust the options
-rows_per_page_options = [5, 10, 20, 50, 100]
-rows_per_page = sl.selectbox("Rows per page:", options=rows_per_page_options)
-
-num_rows = all_track_data.shape[0]
-num_pages = num_rows // rows_per_page + (num_rows % rows_per_page > 0)
-
-page = sl.slider("Page", min_value=1, max_value=num_pages, value=1)
-
-start_index = (page - 1) * rows_per_page
-end_index = min(page * rows_per_page, num_rows)
-
-sl.write(f"Displaying rows {start_index+1} to {end_index} of {num_rows}")
-sl.dataframe(all_track_data.iloc[start_index:end_index])
-
+sl.dataframe(all_track_data)
 
 # Email Subscription part
 sl.write('If you want to get weekly updates of #daily-music and get to know a bunch of fun stats, subscribe to the mailing list!')
