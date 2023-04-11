@@ -23,8 +23,6 @@ if selected_artist:
     all_track_data = all_track_data.loc[all_track_data['ARTIST']
                                         == selected_artist]
 
-# Change this list to adjust the options
-# Change this list to adjust the options
 rows_per_page_options = [5, 10, 20, 50, 100]
 rows_per_page = sl.selectbox("Rows per page:", options=rows_per_page_options)
 
@@ -37,12 +35,16 @@ start_index = (page - 1) * rows_per_page
 end_index = min(page * rows_per_page, num_rows)
 
 sl.write(f"Displaying rows {start_index+1} to {end_index} of {num_rows}")
+
 df = all_track_data.iloc[start_index:end_index]
+
+# Display data as a table
+sl.dataframe(df[['SONG TITLE', 'ARTIST', 'POPULARITY']])
+
+# Display a button for each row
 for index, row in df.iterrows():
-    sl.write(f'{index}, \t{row}')
-    # sl.write(row['SONG TITLE'], row['ARTIST'], row['POPULARITY'])
-    # if sl.button("Open URL", key=index):
-    #     webbrowser.open_new_tab(row['SONG URL'])
+    if sl.button("Open URL", key=index):
+        webbrowser.open_new_tab(row['SONG URL'])
 
 
 # Email Subscription part
